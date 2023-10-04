@@ -90,6 +90,10 @@ class BunWebSocket extends EventEmitter {
         this.#ws.addEventListener("pong", ({ data }) => {
           this.emit("pong", data);
         });
+      } else if (event === "connection") {
+        this.#ws.addEventListener("connection", ({ socket, request }) => {
+          this.emit("connection", socket, request);
+        });
       }
     }
     return super.on(event, listener);
